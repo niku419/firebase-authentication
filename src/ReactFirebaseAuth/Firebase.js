@@ -5,13 +5,13 @@ import 'firebase/storage'
 import 'firebase/firestore'
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyCPo2kEncS2fHOhYi2zpZ4g8V_VrDg-QdY",
-    authDomain: "autho-281311.firebaseapp.com",
-    projectId: "autho-281311",
-    storageBucket: "autho-281311.appspot.com",
-    messagingSenderId: "869240920546",
-    appId: "1:869240920546:web:f90c73a75de8d170fdc1bb",
-    measurementId: "G-RX10JYB72V"
+  apiKey: "AIzaSyCFNVdkgy_yv0-No9xq_pecz2dyFFWo_Po",
+  authDomain: "basic-auth-firebase.firebaseapp.com",
+  projectId: "basic-auth-firebase",
+  storageBucket: "basic-auth-firebase.appspot.com",
+  messagingSenderId: "815608025151",
+  appId: "1:815608025151:web:13d9d603c887f35dd8688a",
+  measurementId: "G-XVRBMSJQVY"
 })
 const firestore = app.firestore()
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -20,8 +20,6 @@ export const githubProvider = new firebase.auth.GithubAuthProvider();
 export const auth = app.auth()
 export const database = {
   userDetails: firestore.collection('userDetails'),
-  folders: firestore.collection('folders'),
-  files: firestore.collection('files'),
   createdAt: firebase.firestore.FieldValue.serverTimestamp
 }
 export const storage = firebase.storage()

@@ -4,7 +4,7 @@ import {Redirect, Link} from 'react-router-dom'
 import { useAuth } from "../Context"
 import  '../../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons'
 
 export default function Signup() {
   const emailRef = useRef()
@@ -13,11 +13,19 @@ export default function Signup() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [redirectPossible, setRedirectPossible] = useState(false)
-  const {signup, currentUser, signinWithGoogle} = useAuth()
+  const {signup, currentUser, signinWithGoogle, signinWithFacebook} = useAuth()
   async function handleSigninWithGoogle(e){
     e.preventDefault()
     try{
       await signinWithGoogle()
+    }catch(err){
+      setError("Couldn't Signin with Google")
+    }
+  }
+  async function handleSigninWithFacebook(e){
+    e.preventDefault()
+    try{
+      await signinWithFacebook()
     }catch(err){
       setError("Couldn't Signin with Facebook")
     }
@@ -39,12 +47,12 @@ export default function Signup() {
   }
   return (
     <Container className="main signup row">
-      {redirectPossible && <Redirect to="/setUsername" />}
+      {redirectPossible && <Redirect to="/Dashboard" />}
       <div className="col-md-6 center-head mt-md-0 mt-3"><h1 className="heading signup-heading">Sign Up to this auth App</h1></div>
       <Container className="shadow-lg p-3 my-5 col-md-6 rounded">
-        {error && <Alert variant="primary">{error}</Alert>}
         {currentUser && currentUser.email}
         <Form onSubmit={handleSubmit}>
+          {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" ref={emailRef} required/>
@@ -75,9 +83,9 @@ export default function Signup() {
         <Button disabled={loading} type="submit" className="yellow" variant="primary yellow" onClick={handleSigninWithGoogle}>
           Sign in with <FontAwesomeIcon icon={faGoogle}/>
         </Button>
-        {/* <Button disabled={loading} type="submit" className="silver" variant="primary" onClick={handleSigninWithFacebook}>
+        <Button disabled={loading} type="submit" className="silver" variant="primary" onClick={handleSigninWithFacebook}>
           <FontAwesomeIcon icon={faFacebookF}/>
-        </Button> */}
+        </Button>
         </Container>
     </Container>
   )

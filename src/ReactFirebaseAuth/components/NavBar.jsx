@@ -14,9 +14,9 @@ export default function NavBar() {
     logout()
   }
   return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-      <Container>
-      {redirectPossible && <Redirect to="/"/>}
+    <Container fluid className="p-0 m-0">
+      <Navbar collapseOnSelect expand="md" variant="dark" bg="transparent">
+        {redirectPossible && <Redirect to="/"/>}
         <Navbar.Brand>Auth App</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end">
@@ -26,7 +26,7 @@ export default function NavBar() {
             </Button>
           </Nav.Item>
         </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      </Navbar>
+    </Container>
   )
 }
